@@ -36,7 +36,7 @@
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %%   Right brace   \}     Tilde         \~
 %%
-\NeedsTeXFormat{pLaTeX2e}
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{suribt}[2007/01/18 KUROKI Yusuke]
 \newif\ifdraft
 \DeclareOption{draft}{\drafttrue}
