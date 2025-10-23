@@ -338,7 +338,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/liquid_only.png}
     \caption{数値計算の計算系の模式図。緑色のものがパイプを模しており、周りを水で満たしているものとする。}
-    \label{fig:placeholder}
+    \label{fig:calculation_system}
 \end{figure}出力された結果は以下のようなものであった。
 \begin{figure}[h]
     \centering
@@ -354,13 +354,13 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/pipe_refrection_sim.png}
     \caption{Caption}
-    \label{fig:placeholder}
+    \label{fig:pipe_reflection}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/pipe_refrection_real.png}
     \caption{Caption}
-    \label{fig:placeholder}
+    \label{fig:pipe_reflection_real}
 \end{figure}
 これらを比較すると、定性的にはシミュレーション側では山のような形になっており、4回繰り返した信号波形のピークが見えにくい一方で、実機実験の方では先がつぶれたような形状をしていることがわかる。
 これらのピークの間の時間差を取得することによって、材質がわかればその厚さが、厚さがわかれば媒体中の音速並びに材質が決定できる。
@@ -372,7 +372,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/Fourier_analysis_real.png}
     \caption{Caption}
-    \label{fig:placeholder}
+    \label{fig:fourier_analysis_real}
 \end{figure}
 これらから、定性的には$4,8\ \mathrm{MHz}$の地点にピークがみられる。使用しているものとちょうど倍の周波数成分がみられるが、これらは倍音(second harmonic)と呼ばれる。\par
 次に、数値計算によって生成した信号に対するフーリエ変換を行った結果を示す。以下は$CFL=0.03$で行ったものである。
@@ -380,14 +380,14 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/fourier_analysis_sim_0.03.png}
     \caption{CFL=0.03に対する信号波形のフーリエ解析結果。実機と同じ4，8にピークがみられる。}
-    \label{fig:placeholder}
+    \label{fig:fourier_analysis_sim_003}
 \end{figure}
 次に、$CFL=0.01$で行った結果を示す。
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/Fourier_analysis_sim_0.01.png}
     \caption{CFL=0.01に対する信号波形のフーリエ解析結果。実機にはない12の成分を持っている。}
-    \label{fig:placeholder}
+    \label{fig:fourier_analysis_sim_001}
 \end{figure}
 これらから、周波数空間の観点から、CFLの値としては0.03が好ましいとした。一方で、これらは計算の成立条件を満たしている(\ref{appendix})ので、以下すべてのシミュレーションはこの値のもと行った。
 \section{固液二層}
@@ -411,7 +411,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
     \centering
     \includegraphics[width=0.4\linewidth]{pictures/results/predicted_vs_ground_truth_noerrorbars.png}
     \caption{縦軸が予測値を、横軸が実測値を示す。ゆえに、点群がy=xに近ければ近いほど精度が高いと判断される。}
-    \label{fig:placeholder}
+    \label{fig:prediction_vs_ground_truth}
 \end{figure}
 
 \newpage

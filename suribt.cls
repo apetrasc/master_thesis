@@ -34,10 +34,10 @@
 %%   Commercial at \@     Left bracket  \[     Backslash     \\
 %%   Right bracket \]     Circumflex    \^     Underscore    \_
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%%   Right brace   \}     Tilde         \~}
+%%   Right brace   \}     Tilde         \~
+%%
 \NeedsTeXFormat{pLaTeX2e}
-\ProvidesClass{suribt}
-  [2007/01/18 KUROKI Yusuke]
+\ProvidesClass{suribt}[2007/01/18 KUROKI Yusuke]
 \newif\ifdraft
 \DeclareOption{draft}{\drafttrue}
 \DeclareOption{final}{\draftfalse}
@@ -166,7 +166,7 @@
 \renewcommand{\and}{\\ &}% [2005/12/09]
 \newcommand*{\supervisor}[1]{\gdef\@supervisor{#1}}% #1: 指導教員名 + 役職 [2005/12/09]
 \gdef\@supervisor@prefix{\if@english Supervisor\else 指導教員\fi}
-\newcommand*{\handin}[2]{\year #1 \month #2 \day 0}% #1: 年, #2: 月
+\newcommand*{\handin}[2]{\gdef\@handinyear{#1}\gdef\@handinmonth{#2}}% #1: 年, #2: 月
 \newcommand*{\eauthor}[1]{\gdef\@eauthor{#1}}% #1: 著者名英語つづり
 \newcommand*{\email}[1]{\gdef\authors@email{#1}}% #1: e-mail アドレス
 \newcommand*{\keywords}[1]{\gdef\@keywords{#1}}% #1: キーワード
@@ -252,7 +252,7 @@
           \@supervisor@prefix & \@supervisor
         \end{tabular}\par}%
         \vskip 2cm
-        %{\@date\par}%
+        {\ifx\@handinyear\@undefined\else\@handinyear 年 \@handinmonth 月\fi\par}%
         \vskip 2cm
         %{\@belongsto \par}%
       \end{center}\par

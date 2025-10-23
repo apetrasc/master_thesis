@@ -1,0 +1,72 @@
+{
+    "latex-workshop.latex.tools": [
+        {
+            "name": "uplatex",
+            "command": "uplatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pbibtex",
+            "command": "pbibtex",
+            "args": [
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "dvipdfmx",
+            "command": "dvipdfmx",
+            "args": [
+                "%DOC%.dvi"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "uplatex + pbibtex + dvipdfmx",
+            "tools": [
+                "uplatex",
+                "pbibtex",
+                "uplatex",
+                "uplatex",
+                "dvipdfmx"
+            ]
+        },
+        {
+            "name": "uplatex + dvipdfmx (simple)",
+            "tools": [
+                "uplatex",
+                "dvipdfmx"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipe.default": "uplatex + pbibtex + dvipdfmx",
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk",
+        "*.synctex.gz",
+        "*.dvi"
+    ]
+}
