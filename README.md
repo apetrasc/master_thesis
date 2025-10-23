@@ -7,7 +7,11 @@
 ### PDF作成
 
 手順：
-
+latexmkrcを使う場合
+```
+latexmk -pdf main.tex
+```
+手動で行う場合
 ```bash
 uplatex main.tex    # 1回目：下準備と目次・参照ラベル作成
 pbibtex main        # 参考文献の処理

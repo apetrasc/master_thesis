@@ -286,7 +286,7 @@ $Z_0$が大きく異なる物質の界面では超音波は反射する。ゆえ
 \subsection{モデル解釈}
 CNNやほかのアーキテクチャで学習された特徴の解釈に用いられる方法はいくつかある。例えば、学習したカーネルそのものをプロットする方法である。これらに関しては、深層学習の際に用いたカーネルをすべてプロットするというものである。一般に、\cite{Bishop:DeepLearning24}にあるように、下層のカーネルほどエッジのような機械的な特徴を、上層に行くほど高次の概念を学習していると解釈される。\par
 一方、入力のどの領域が予測に最も寄与しているかを可視化する方法として顕著性map(saliency map)というものがあげられる。これらは、入力のどの領域に大きな重みを割り当てているかを確認する方法である。その最たるものがGrad-cam\cite{Selvaraju_2019}と呼ばれる方法である。これらの機能の詳細に立ち入る前に、その応用例に焦点を当てる。以下は、原論文にあったような、自然画像を入力として分類を行うモデルである。
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/grad_cam_explained.png}
     \caption{画像入力に対するsaliency mapを可視化したもの。1枚の画像に犬と猫が映っているが、犬、猫それぞれのクラス予測に対応する入力箇所が可視化されている。}
@@ -336,13 +336,13 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 実際の数値計算による結果と、その概要を示す。目安として、研究室の計算環境であるNvidia RTX 4090を利用した場合には、１データあたりおよそ4時間を要した。前節での物性値をもとにして数値計算を行った。
 \section{液相のみ}
 まず、液相のみのシミュレーションが妥当かどうかを実機をもとに検証する。
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/liquid_only.png}
     \caption{数値計算の計算系の模式図。緑色のものがパイプを模しており、周りを水で満たしているものとする。}
     \label{fig:calculation_system}
 \end{figure}出力された結果は以下のようなものであった。
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/liquid_only_signal.png}
     \caption{液相のみの場合の信号波形}
@@ -352,13 +352,13 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 これらの信号波形について、より詳細な解析を行った。
 \subsection{超音波厚さ測定}
 シミュレーション生成の信号のうち、管壁からのものを詳細に解析する。信号に対してはヒルベルト変換により検波処理を行っており、包絡線を取得してある。このとき、以下の結果が得られる。
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/pipe_refrection_sim.png}
     \caption{Caption}
     \label{fig:pipe_reflection}
 \end{figure}
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/pipe_refrection_real.png}
     \caption{Caption}
@@ -370,7 +370,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 今回は情報が不足しているため、材質をアクリルだとみなし音速の値としては$2790\ \mathrm{m/s}$を採用した。
 \subsection{フーリエ解析}
 次に、この領域に対してフーリエ解析を実行した。まず、実機データのパイプ部分に対する周波数成分を解析する。
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/Fourier_analysis_real.png}
     \caption{Caption}
@@ -378,14 +378,14 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 \end{figure}
 これらから、定性的には$4,8\ \mathrm{MHz}$の地点にピークがみられる。使用しているものとちょうど倍の周波数成分がみられるが、これらは倍音(second harmonic)と呼ばれる。\par
 次に、数値計算によって生成した信号に対するフーリエ変換を行った結果を示す。以下は$CFL=0.03$で行ったものである。
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/fourier_analysis_sim_0.03.png}
     \caption{CFL=0.03に対する信号波形のフーリエ解析結果。実機と同じ4，8にピークがみられる。}
     \label{fig:fourier_analysis_sim_003}
 \end{figure}
 次に、$CFL=0.01$で行った結果を示す。
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/Fourier_analysis_sim_0.01.png}
     \caption{CFL=0.01に対する信号波形のフーリエ解析結果。実機にはない12の成分を持っている。}
@@ -394,7 +394,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 これらから、周波数空間の観点から、CFLの値としては0.03が好ましいとした。一方で、これらは計算の成立条件を満たしている(\ref{appendix})ので、以下すべてのシミュレーションはこの値のもと行った。
 \section{固液二層}
 3次元シミュレーションによって計測信号波形を生成した。これらは、機械学習用に使用するものである。基本的に機械学習用データは多いほうが望ましいが、多数は不可能であった。故に100ほどのデータを生成し、それによって訓練を行った。その結果を以下に示す。
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/results/solid_liquid7_processed_0pulse.png}
     \caption{固相粒子を含めた場合の信号波形}
@@ -409,7 +409,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 回帰モデルをMSE（Mean square error、平均二乗誤差）によって訓練し、その予測精度を評価する。評価に関しては、回帰で一般に用いられるRMSE(Root mean Square error), MAE(Mean Absolute error)を用いた。
 \section{固液二層流}
 以下は、その予測精度を評価したグラフである。ガラスビーズを固相として用いた場合、石を固相として用いた場合の固相体積率が色分けされてプロットしてある。
-\begin{figure}[b]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.4\linewidth]{pictures/results/predicted_vs_ground_truth_noerrorbars.png}
     \caption{縦軸が予測値を、横軸が実測値を示す。ゆえに、点群がy=xに近ければ近いほど精度が高いと判断される。}
@@ -419,7 +419,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 \newpage
 \subsection{課題}
 これらテストデータに対する偏りとして、相体積率の最大値が0.15(正確には、2024年データにおいて0.149)というものがあげられる。ゆえに、0から0.15までの値をランダムに予測したり、適当な一次関数からのサンプルでもRMSEの率はそれほど高くはならない。このような議論を行う上では統計検定が必要である。平均すればある程度良い予測結果が得られる一方で、いくつかの欠点がある。まず一つに、機械学習の際、訓練データとテストデータ（実機）の評価が大きくずれる事象が数多く見られた。定性的に一定の類似性はみられるとはいえ、シミュレーションと実機ではデータにあまりに多くの差異がある可能性がある。\par
-\begin{figure}[hbp]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/solid_liquid7_processed_0img.png}
     \includegraphics[width=0.5\linewidth]{pictures/explanation/P20240726-1600_processed_1img.png}
@@ -428,7 +428,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 \end{figure}
 この二つの画像は、そのサンプルである。超音波パルスの幅や、多重反射が明瞭に確認できる回数などに違いが見て取れる。それでも一定の精度を得られたのは、情報処理のメカニズムにおいて、学習の過程でたまたま十分にロバストで実機データを処理するのにも使用可能な局所最適解・パターンを発見したからである可能性が高い。事実、学習率をさげて訓練を行った場合には、訓練データに対してよい精度を示しかつ安定的な学習を行った一方で実機データの値を適切に予測することができなくなった。
 だが、それよりも重要なのは、予測に際し分散が非常に大きいということである。上記のグラフは平均値のみをプロットしたが、時間平均を計算する過程で評価できる分散の値も同時にプロットすると
-\begin{figure}[b]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\linewidth]{pictures/explanation/predicted_vs_ground_truth_2.png}
     \caption{Caption}
@@ -464,7 +464,7 @@ CNNやほかのアーキテクチャで学習された特徴の解釈に用い�
 \section{開発体制}
 私よりも一つ上の代での共同研究の体制では、実機データをそのまま機械学習に通すというアプローチが採用されていた。そして、評価指標・目標についての共有は不十分であった。さらに、データがあまりに少ないために、Grad-camの画像をもとに有益な解釈や結論を得るのが難しいという欠点もあった。それらに対し、一般に機械学習の世界での経験則として「前処理に注力することで精度が向上する」というものがあるため、ヒルベルト変換・バンドパスフィルタの適用という思考に至ったと考えられる。\par
 これらに対しては、無論データが有限である状況下において最大限の結果を残すという意味で有益ではあるものの、そのデータを増やすことはできないのか、何か別の議論が発生したとして、それらに対処する案をより多角的に検討することが重要である。その観点から、他のグループで使用されている数値計算ソフトウェアを応用してデータを取得するという発想に偶然至り、本研究がなされた。\par
-LLMの学習データが不足しているのか、はたまたプロンプトが悪いのかは不明だがＧＰＴモデルが出力する数値計算のコードは間違っていたり、うまく動かないことが極めて多かった。しかし、それでも利用する意義は大きい。以下にその利点を示す。\par
+LLMの学習データが不足しているのか、はたまたプロンプトが悪いのかは不明だがGPTGPTモデルが出力する数値計算のコードは間違っていたり、うまく動かないことが極めて多かった。しかし、それでも利用する意義は大きい。以下にその利点を示す。\par
 ・実機データの改善要素のうち、改善不可能なものと対応可能であるものが一部明確になる。\par
 ・シミュレーションデータも、一部改良を行うことによって機械学習データセットとして利用できる。\par
 Grad-camの画像を確認する際、それが計測機器依存のバリアンスなのか、物理現象として重要な原因なのかを判断することができないという事態が多くみられた。議論の材料さえ不足しており、機械学習のデータセットが不足している状況下においては十分考えられることである。\par
