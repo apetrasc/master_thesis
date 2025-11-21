@@ -7,20 +7,30 @@
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 "-file-line-error",
+                "-kanji=utf8",
                 "%DOC%"
             ]
         },
         {
             "name": "pbibtex",
-            "command": "pbibtex",
+            "command": "bash",
             "args": [
-                "%DOC%"
-            ]
+                "-c",
+                "cd \"${LATEX_DIR}\" && pbibtex -kanji=utf8 \"${LATEX_DOC}\""
+            ],
+            "env": {
+                "LATEX_DIR": "%DIR%",
+                "LATEX_DOC": "%DOC%"
+            }
         },
         {
             "name": "dvipdfmx",
             "command": "dvipdfmx",
             "args": [
+                "-f",
+                "ptex-ipaex.map",
+                "-z",
+                "0",
                 "%DOC%.dvi"
             ]
         }
@@ -45,7 +55,14 @@
         }
     ],
     "latex-workshop.latex.recipe.default": "uplatex + pbibtex + dvipdfmx",
-    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.outDir": "%DIR%",
+    "latex-workshop.latex.root": "main.tex",
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "latex-workshop.view.pdf.internal.synctex.mode": 1,
+    "latex-workshop.latex.option.shellEscape": "never",
     "latex-workshop.latex.clean.fileTypes": [
         "*.aux",
         "*.bbl",
@@ -73,5 +90,10 @@
     "editor.wordWrapColumn": 80,
     "editor.rulers": [80],
     "editor.guides.bracketPairs": true,
-    "editor.guides.indentation": true
+    "editor.guides.indentation": true,
+    "latex-workshop.message.log.show": true,
+    "latex-workshop.message.badge.show": true,
+    "latex-workshop.message.error.show": true,
+    "latex-workshop.message.warning.show": true,
+    "latex-workshop.latex.build.clearCache.enabled": false
 }
