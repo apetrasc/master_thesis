@@ -1,0 +1,26 @@
+[
+    {
+        "key": "ctrl+shift+b",
+        "command": "latex-workshop.build",
+        "when": "editorTextFocus && editorLangId == 'latex'"
+    },
+    {
+        "key": "ctrl+alt+v",
+        "command": "latex-workshop.view",
+        "when": "editorTextFocus && editorLangId == 'latex'"
+    },
+    {
+        "key": "ctrl+alt+c",
+        "command": "latex-workshop.clean",
+        "when": "editorTextFocus && editorLangId == 'latex'"
+    },
+    {
+        "key": "ctrl+shift+r",
+        "command": "latex-workshop.refresh-viewer"
+    },
+    {
+        "key": "ctrl+alt+j",
+        "command": "latex-workshop.synctex",
+        "when": "editorTextFocus && editorLangId == 'latex'"
+    }
+]

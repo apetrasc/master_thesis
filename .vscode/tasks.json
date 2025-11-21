@@ -1,0 +1,42 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build LaTeX (Full)",
+            "type": "shell",
+            "command": "uplatex -synctex=1 -interaction=nonstopmode -file-line-error -kanji=utf8 main.tex && pbibtex -kanji=utf8 main && uplatex -synctex=1 -interaction=nonstopmode -file-line-error -kanji=utf8 main.tex && uplatex -synctex=1 -interaction=nonstopmode -file-line-error -kanji=utf8 main.tex && dvipdfmx -f ptex-ipaex.map -z 0 -o main_temp.pdf main.dvi && gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dEmbedAllFonts=true -dSubsetFonts=true -dCompatibilityLevel=1.5 -sOutputFile=main.pdf main_temp.pdf && rm -f main_temp.pdf",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean LaTeX Auxiliary Files",
+            "type": "shell",
+            "command": "rm -f main.aux main.bbl main.blg main.idx main.ind main.lof main.lot main.out main.toc main.acn main.acr main.alg main.glg main.glo main.gls main.ist main.fls main.log main.fdb_latexmk main.synctex.gz main.dvi main_temp.pdf",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Optimize PDF Only",
+            "type": "shell",
+            "command": "gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dEmbedAllFonts=true -dSubsetFonts=true -dCompatibilityLevel=1.5 -sOutputFile=main_optimized.pdf main.pdf && mv main_optimized.pdf main.pdf",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+}
+
+
+

@@ -7,44 +7,54 @@
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 "-file-line-error",
+                "-kanji=utf8",
                 "%DOC%"
             ]
         },
         {
             "name": "pbibtex",
-            "command": "pbibtex",
+            "command": "bash",
             "args": [
-                "%DOC%"
+                "-c",
+                "cd '%DIR%' && pbibtex -kanji=utf8 '%DOC%'"
             ]
         },
         {
-            "name": "dvipdfmx",
+            "name": "dvipdfmx-temp",
             "command": "dvipdfmx",
             "args": [
+                "-f",
+                "ptex-ipaex.map",
+                "-z",
+                "0",
+                "-o",
+                "%DOC%_temp.pdf",
                 "%DOC%.dvi"
+            ]
+        },
+        {
+            "name": "optimize-pdf",
+            "command": "bash",
+            "args": [
+                "-c",
+                "gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dEmbedAllFonts=true -dSubsetFonts=true -dCompatibilityLevel=1.5 -sOutputFile='%DOC%.pdf' '%DOC%_temp.pdf' && rm -f '%DOC%_temp.pdf'"
             ]
         }
     ],
     "latex-workshop.latex.recipes": [
         {
-            "name": "uplatex + pbibtex + dvipdfmx",
+            "name": "uplatex + pbibtex + dvipdfmx + optimize",
             "tools": [
                 "uplatex",
                 "pbibtex",
                 "uplatex",
                 "uplatex",
-                "dvipdfmx"
-            ]
-        },
-        {
-            "name": "uplatex + dvipdfmx (simple)",
-            "tools": [
-                "uplatex",
-                "dvipdfmx"
+                "dvipdfmx-temp",
+                "optimize-pdf"
             ]
         }
     ],
-    "latex-workshop.latex.recipe.default": "uplatex + pbibtex + dvipdfmx",
+    "latex-workshop.latex.recipe.default": "uplatex + pbibtex + dvipdfmx + optimize",
     "latex-workshop.latex.autoBuild.run": "onFileChange",
     "latex-workshop.latex.clean.fileTypes": [
         "*.aux",
@@ -67,11 +77,16 @@
         "*.log",
         "*.fdb_latexmk",
         "*.synctex.gz",
-        "*.dvi"
+        "*.dvi",
+        "*_temp.pdf"
     ],
-    "editor.wordWrap": "on",
-    "editor.wordWrapColumn": 80,
-    "editor.rulers": [80],
-    "editor.guides.bracketPairs": true,
-    "editor.guides.indentation": true
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "latex-workshop.view.pdf.internal.synctex.mode": 1,
+    "latex-workshop.latex.outDir": "%DIR%",
+    "latex-workshop.latex.root": "main.tex",
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.latex.option.shellEscape": "never",
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": true
 }
