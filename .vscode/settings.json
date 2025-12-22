@@ -33,26 +33,17 @@
                 "0",
                 "%DOC%.dvi"
             ]
-        },
-        {
-            "name": "optimize-pdf",
-            "command": "bash",
-            "args": [
-                "-c",
-                "gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dEmbedAllFonts=true -dSubsetFonts=true -dCompatibilityLevel=1.5 -sOutputFile='%DOC%.pdf' '%DOC%_temp.pdf' && rm -f '%DOC%_temp.pdf'"
-            ]
         }
     ],
     "latex-workshop.latex.recipes": [
         {
-            "name": "uplatex + pbibtex + dvipdfmx + optimize",
+            "name": "uplatex + pbibtex + dvipdfmx",
             "tools": [
                 "uplatex",
                 "pbibtex",
                 "uplatex",
                 "uplatex",
-                "dvipdfmx-temp",
-                "optimize-pdf"
+                "dvipdfmx-temp"
             ]
         }
     ],
